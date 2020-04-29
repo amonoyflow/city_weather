@@ -24,29 +24,25 @@ class _Home extends State<Home> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     homeBloc = HomeBloc();
-    homeBloc.getCurrentWeather();
-    homeBloc.getCurrentLocation();
-  }
-
-  @override
-  void dispose() {
-    homeBloc.dispose();
-    super.dispose();
+    homeBloc.initialize();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: _buildAppBar(),
-      body: StreamBuilder(
-        stream: homeBloc.currentWeatherStream,
-        builder: (context, AsyncSnapshot<CurrentWeather> snapshot) {
-          if (snapshot.hasData) {
-            return _buildBody(snapshot.data);
-          } 
-          return Center(child: CircularProgressIndicator());
-        },
+    return RefreshIndicator(
+      onRefresh: _refresh,
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: _buildAppBar(),
+        body: StreamBuilder(
+          stream: homeBloc.currentWeatherStream,
+          builder: (context, AsyncSnapshot<CurrentWeather> snapshot) {
+            if (snapshot.hasData) {
+              return _buildBody(snapshot.data);
+            } 
+            return Center(child: CircularProgressIndicator());
+          },
+        ),
       ),
     );
   }
@@ -223,6 +219,13 @@ class _Home extends State<Home> with TickerProviderStateMixin {
     );
   }
 
+  Future<void> _refresh() async {
+    setState(() {
+      homeBloc = HomeBloc();
+      homeBloc.initialize();
+    });
+  }
+
   void _onSettingsPressed() {
     showModalBottomSheet(
       context: context, 
@@ -243,5 +246,11 @@ class _Home extends State<Home> with TickerProviderStateMixin {
         );
       }
     );
+  }
+
+  @override
+  void dispose() {
+    homeBloc.dispose();
+    super.dispose();
   }
 }

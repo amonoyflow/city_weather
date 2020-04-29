@@ -1,10 +1,9 @@
-
 import 'package:city_weather/models/current_weather.dart';
-import 'package:city_weather/resources/geolocator.dart';
+import 'package:city_weather/services/geolocator_service.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:rxdart/rxdart.dart';
 
-import 'bloc_base.dart';
+import '_bloc_base.dart';
 
 class HomeBloc extends BlocBase {
   final currentWeatherFetcher = PublishSubject<CurrentWeather>();
@@ -13,18 +12,16 @@ class HomeBloc extends BlocBase {
   Stream<CurrentWeather> get currentWeatherStream => currentWeatherFetcher.stream;
   Stream<List<Placemark>> get currentLocationStream => currentLocationFetcher.stream;
 
-  void getCurrentWeather() async {
+  Future<void> initialize() async {
     var position = await GeoLocatorService().getLocation();
-    if (position == null) return;
+    if (position == null) {
+      print(position.toString());
+      return;
+    }
 
-    CurrentWeather weather = await repository.getCurrentWeather(position.latitude, position.longitude);
+    CurrentWeather weather = await weatherService.getCurrentWeather(position.latitude, position.longitude);
     currentWeatherFetcher.sink.add(weather);
-  }
-
-  void getCurrentLocation() async {
-    var position = await GeoLocatorService().getLocation();
-    if (position == null) return;
-
+    
     List<Placemark> placemark = await Geolocator().placemarkFromCoordinates(position.latitude, position.longitude);
     currentLocationFetcher.sink.add(placemark);
   }
