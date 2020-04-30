@@ -6,4 +6,5 @@ class Assets {
   static final String iconWindSpeed = "assets/images/ic_windspeed.png";
   static final String iconHumidity = "assets/images/ic_humidity.png";
   static final String iconClouds = "assets/images/ic_clouds.png";
+  static final String iconMeasurement = "assets/images/ic_measurement.png";
 }

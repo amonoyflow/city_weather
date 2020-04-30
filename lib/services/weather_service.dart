@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:city_weather/constant/keys.dart';
 import 'package:city_weather/models/current_weather.dart';
-
 import '_service_base.dart';
 
 class WeatherService extends ServiceBase {

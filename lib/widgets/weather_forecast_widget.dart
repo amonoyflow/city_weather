@@ -74,7 +74,7 @@ class _WeatherForecastState extends State<WeatherForecastWidget> with TickerProv
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
-      key: ValueKey<int>(items.length),
+      key: ValueKey<num>(items.length),
       children: [
         ...List.generate(
           items.length,
@@ -133,7 +133,7 @@ class _WeatherForecastState extends State<WeatherForecastWidget> with TickerProv
   Widget createWeeklyForecast() {
     List<Daily> items = widget.daily.where((x) => x.today.day != DateTime.now().day).toList();
     return Column(
-      key: ValueKey<int>(items.length),
+      key: ValueKey<num>(items.length),
       children: [
         ...List.generate(
           items.length,

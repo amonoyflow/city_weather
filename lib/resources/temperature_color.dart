@@ -2,7 +2,7 @@ import 'package:city_weather/constant/weather-color-pallete.dart';
 import 'package:flutter/material.dart';
 
 class TemperatureColor {
-  static Color getTemperatureColor(double temperature) {
+  static Color getTemperatureColor(num temperature) {
     if (temperature >= 38) {
       return WeatherColorPallete.weatherRed;
     }
