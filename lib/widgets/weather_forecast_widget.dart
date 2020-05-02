@@ -1,6 +1,8 @@
+import 'package:city_weather/blocs/settigs_bloc.dart';
 import 'package:city_weather/models/daily.dart';
 import 'package:city_weather/models/hourly.dart';
 import 'package:city_weather/resources/datetime_helper.dart';
+import 'package:city_weather/resources/format_helper.dart';
 import 'package:city_weather/resources/temperature_color.dart';
 import 'package:flutter/material.dart';
 
@@ -29,16 +31,10 @@ class _WeatherForecastState extends State<WeatherForecastWidget> with TickerProv
     this.tabController.addListener(() {
       if (this.tabController.indexIsChanging) {
         setState(() {
-          build(context);
+          _createForecast(this.tabController.index == 0);
         });
       }
     });
-  }
-
-  @override
-  void dispose() {
-    this.tabController.dispose();
-    super.dispose();
   }
 
   @override
@@ -52,9 +48,7 @@ class _WeatherForecastState extends State<WeatherForecastWidget> with TickerProv
             labelColor: Colors.grey.shade700,
             indicatorColor: widget.indicatorColor,
             indicatorSize: TabBarIndicatorSize.tab,
-            labelStyle: TextStyle(
-              fontWeight: FontWeight.w700
-            ),
+            labelStyle: TextStyle(fontWeight: FontWeight.w700),
             tabs: <Tab>[
               Tab(text: "Hourly Forecast"),
               Tab(text: "Daily Forecast")
@@ -62,14 +56,22 @@ class _WeatherForecastState extends State<WeatherForecastWidget> with TickerProv
           ),
           AnimatedSwitcher(
             duration: Duration(milliseconds: 0),
-            child: createForecast(this.tabController.index == 0)
+            child: _createForecast(this.tabController.index == 0)
           ),
         ],
       ),
     );
   }
 
-  Widget createTodayForecast() {
+  Widget _createForecast(bool isToday) {
+    if (isToday) {
+      return _createTodayForecast();
+    } else {
+      return _createWeeklyForecast();
+    }
+  }
+
+  Widget _createTodayForecast() {
     List<Hourly> items = widget.hourly.where((x) => x.today.month == DateTime.now().month && x.today.day == DateTime.now().day).toList();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -82,10 +84,8 @@ class _WeatherForecastState extends State<WeatherForecastWidget> with TickerProv
             height: 80,
             decoration: BoxDecoration(
               border: Border(
-                  bottom: BorderSide(
-                    color: Colors.grey.shade200
-                  )
-                ),
+                bottom: BorderSide(color: Colors.grey.shade200)
+              ),
             ),
             child: Center(
               child: ListTile(
@@ -102,12 +102,18 @@ class _WeatherForecastState extends State<WeatherForecastWidget> with TickerProv
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
-                        Text(
-                          "${items[index].temp.floor().toString()}\u00B0",
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.grey.shade700,
-                          ),
+                        StreamBuilder(
+                          stream: settingsBloc.currentUnitStream,
+                          initialData: false,
+                          builder: (context, AsyncSnapshot<bool> snapshot) {
+                            return Text(
+                              "${FormatHelper.formatTemperature(items[index].temp, settingsBloc.isUnitImperial()).floor().toString()}\u00B0",
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey.shade700,
+                              ),
+                            );
+                          }
                         ),
                         SizedBox(width: 5),
                         Container(
@@ -130,7 +136,7 @@ class _WeatherForecastState extends State<WeatherForecastWidget> with TickerProv
     );
   }
 
-  Widget createWeeklyForecast() {
+  Widget _createWeeklyForecast() {
     List<Daily> items = widget.daily.where((x) => x.today.day != DateTime.now().day).toList();
     return Column(
       key: ValueKey<num>(items.length),
@@ -141,10 +147,8 @@ class _WeatherForecastState extends State<WeatherForecastWidget> with TickerProv
             height: 80,
             decoration: BoxDecoration(
               border: Border(
-                  bottom: BorderSide(
-                    color: Colors.grey.shade200
-                  )
-                ),
+                bottom: BorderSide(color: Colors.grey.shade200)
+              ),
             ),
             child: Center(
               child: ListTile(
@@ -170,12 +174,18 @@ class _WeatherForecastState extends State<WeatherForecastWidget> with TickerProv
                           ),
                         ),
                         SizedBox(width: 10),
-                        Text(
-                          "${items[index].temp.day.floor().toString()}\u00B0",
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.grey.shade700,
-                          ),
+                        StreamBuilder(
+                          stream: settingsBloc.currentUnitStream,
+                          initialData: false,
+                          builder: (context, AsyncSnapshot<bool> snapshot) {
+                            return Text(
+                              "${FormatHelper.formatTemperature(items[index].temp.day, settingsBloc.isUnitImperial()).floor().toString()}\u00B0",
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey.shade700,
+                              ),
+                            );
+                          }
                         ),
                         SizedBox(width: 5),
                         Container(
@@ -200,12 +210,18 @@ class _WeatherForecastState extends State<WeatherForecastWidget> with TickerProv
                           ),
                         ),
                         SizedBox(width: 10),
-                        Text(
-                          "${items[index].temp.eve.floor().toString()}\u00B0",
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.grey.shade700,
-                          ),
+                        StreamBuilder(
+                          stream: settingsBloc.currentUnitStream,
+                          initialData: false,
+                          builder: (context, AsyncSnapshot<bool> snapshot) {
+                            return Text(
+                              "${FormatHelper.formatTemperature(items[index].temp.eve, settingsBloc.isUnitImperial()).floor().toString()}\u00B0",
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey.shade700,
+                              ),
+                            );
+                          }
                         ),
                         SizedBox(width: 5),
                         Container(
@@ -228,11 +244,9 @@ class _WeatherForecastState extends State<WeatherForecastWidget> with TickerProv
     );
   }
 
-  Widget createForecast(bool isToday) {
-    if (isToday) {
-      return createTodayForecast();
-    } else {
-      return createWeeklyForecast();
-    }
+  @override
+  void dispose() {
+    this.tabController.dispose();
+    super.dispose();
   }
 }

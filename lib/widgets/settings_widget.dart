@@ -1,3 +1,4 @@
+import 'package:city_weather/blocs/settigs_bloc.dart';
 import 'package:city_weather/constant/assets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,19 +9,18 @@ class SettingsWidget extends StatefulWidget {
 }
 
 class _SettingsState extends State<SettingsWidget> {
-  bool _metric = false;
-
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: IconButton(
-        icon: Icon(Icons.settings, color: Colors.black),
-        onPressed: _onPressed,
+    return IconButton(
+      icon: Icon(
+        Icons.settings, 
+        color: Colors.black
       ),
+      onPressed: _onSettingsTap,
     );
   }
 
-  _onPressed() {
+  _onSettingsTap() {
     showModalBottomSheet(
       context: context, 
       backgroundColor: Colors.white,
@@ -31,23 +31,41 @@ class _SettingsState extends State<SettingsWidget> {
         )
       ),
       builder: (context) {
-        return Container(
-          height: 100,
-          child: Center(
-            child: SwitchListTile(
-              title: Text("Use Imperial System"),
-              value: _metric,
-              onChanged: (bool value) { setState(() { _metric = value; }); 
-              },
-              secondary: Image.asset(
-                Assets.iconMeasurement,
-                width: 30,
-                height: 30,
-              ),
-            ),
-          )
-        );
+        return Bottom();
       }
+    );
+  }
+}
+
+class Bottom extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => _BottomState();
+}
+
+class _BottomState extends State<Bottom> {
+  bool unitImperial = settingsBloc.isUnitImperial();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 100,
+      child: Center(
+        child: SwitchListTile(
+          title: Text("Use Imperial System"),
+          value: unitImperial,
+          onChanged: (bool newValue) {
+            setState(() {
+              settingsBloc.onUnitChanged(newValue);
+              unitImperial = newValue;
+            });
+          },
+          secondary: Image.asset(
+            Assets.iconMeasurement,
+            width: 30,
+            height: 30,
+          ),
+        ),
+      )
     );
   }
 }

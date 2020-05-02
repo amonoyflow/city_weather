@@ -1,3 +1,4 @@
+import 'package:city_weather/blocs/settigs_bloc.dart';
 import 'package:city_weather/constant/assets.dart';
 import 'package:city_weather/models/current_weather.dart';
 import 'package:city_weather/resources/datetime_helper.dart';
@@ -23,7 +24,6 @@ class _BodyState extends State<BodyWidget> {
   @override
   Widget build(BuildContext context) {
     var weatherColor = TemperatureColor.getTemperatureColor(widget.currentWeather.current.temp);
-    var windspeed = FormatHelper.formatWindSpeed(widget.currentWeather.current.windSpeed, true);
 
     return SingleChildScrollView(
       child:  Column(
@@ -36,11 +36,7 @@ class _BodyState extends State<BodyWidget> {
                 image: AssetImage(Assets.bgCity),
                 fit: BoxFit.fill,
               ),
-              border: Border(
-                bottom: BorderSide(
-                  color: weatherColor
-                )
-              ),
+              border: Border(bottom: BorderSide(color: weatherColor)),
             ),
           ),
           Stack(
@@ -48,17 +44,13 @@ class _BodyState extends State<BodyWidget> {
               Container(
                 height: 350,
                 decoration: BoxDecoration(
-                  border: Border(
-                    top: BorderSide(
-                      color: weatherColor
-                    )
-                  ),
+                  border: Border(top: BorderSide(color: weatherColor)),
                   gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [weatherColor, weatherColor, Colors.white],
-                      stops: [0.3, 0.3, 0.8]
-                    ),
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [weatherColor, weatherColor, Colors.white],
+                    stops: [0.3, 0.3, 0.8]
+                  ),
                 ),
                 child: Stack(
                   alignment: Alignment.topCenter,
@@ -69,13 +61,22 @@ class _BodyState extends State<BodyWidget> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Text(
-                              widget.currentWeather.current.temp.floor().toString(),
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 100,
-                                fontWeight: FontWeight.w800
-                              ),
+                            StreamBuilder(
+                              stream: settingsBloc.currentUnitStream,
+                              initialData: false,
+                              builder: (context, AsyncSnapshot<bool> snapshot) {
+                                if (snapshot.hasData) {
+                                  return Text(
+                                    FormatHelper.formatTemperature(widget.currentWeather.current.temp, settingsBloc.isUnitImperial()).floor().toString(),
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 100,
+                                      fontWeight: FontWeight.w800
+                                    ),
+                                  );
+                                } 
+                                return Container();
+                              },
                             ),
                             Text(
                               "\u00B0",
@@ -103,34 +104,7 @@ class _BodyState extends State<BodyWidget> {
                         ),
                       ],
                     ),
-                    Container(
-                      alignment: Alignment.bottomCenter,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          WeatherInfoWidget(
-                            title: "Humidity",
-                            icon: Assets.iconHumidity,
-                            value: "${widget.currentWeather.current.humidity}%",
-                          ),
-                          WeatherInfoWidget(
-                            title: "Wind",
-                            icon: Assets.iconWindSpeed,
-                            value: windspeed,
-                          ),
-                          WeatherInfoWidget(
-                            title: "UV Index",
-                            icon: Assets.iconUVIndex,
-                            value: widget.currentWeather.current.uvi.toString(),
-                          ),
-                          WeatherInfoWidget(
-                            title: "Clouds",
-                            icon: Assets.iconClouds,
-                            value: "${widget.currentWeather.current.clouds.toString()}%",
-                          ),
-                        ],
-                      ),
-                    )
+                    WeatherInfoWidget(currentWeather: widget.currentWeather),
                   ],
                 ),
               ),

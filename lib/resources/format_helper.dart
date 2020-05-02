@@ -1,11 +1,9 @@
 class FormatHelper {
-  static String formatWindSpeed(double windSpeed, bool isMetric) {
-    if (isMetric) {
-      return "$windSpeed km/h";
-    }
-    else {
-      var speed = windSpeed * 0.62137;
-      return "$speed mi/h";
-    }
+  static String formatWindSpeed(num windSpeed, bool isImperial) {
+    return isImperial ? "${(windSpeed * 0.62137).floor()} mi/h" : "${windSpeed.floor()} km/h";
+  }
+
+  static num formatTemperature(num temperature, bool isImperial) {
+    return isImperial ? (temperature * 1.8) + 32 : temperature;
   }
 }

@@ -1,30 +1,30 @@
-import 'package:city_weather/constant/weather-color-pallete.dart';
+import 'package:city_weather/constant/weather_pallete.dart';
 import 'package:flutter/material.dart';
 
 class TemperatureColor {
   static Color getTemperatureColor(num temperature) {
     if (temperature >= 38) {
-      return WeatherColorPallete.weatherRed;
+      return WeatherPallete.weatherRed;
     }
     else if (temperature >= 32 && temperature < 38) {
-      return WeatherColorPallete.weatherDarkOrange;
+      return WeatherPallete.weatherDarkOrange;
     }
     else if (temperature >= 25 && temperature < 32) {
-      return WeatherColorPallete.weatherOrange;
+      return WeatherPallete.weatherOrange;
     }
     else if (temperature >= 15 && temperature < 25) {
-      return WeatherColorPallete.weatherYellow;
+      return WeatherPallete.weatherYellow;
     }
     else if (temperature >= 10 && temperature < 15) {
-      return WeatherColorPallete.weatherGreen;
+      return WeatherPallete.weatherGreen;
     }
     else if (temperature >= 0 && temperature < 10) {
-      return WeatherColorPallete.weatherLightBlue;
+      return WeatherPallete.weatherLightBlue;
     }
     else if (temperature >= -10 && temperature < 0) {
-      return WeatherColorPallete.weatherBlue;
+      return WeatherPallete.weatherBlue;
     }
 
-    return WeatherColorPallete.weatherPurple;
+    return WeatherPallete.weatherPurple;
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class WeatherColorPallete {
+class WeatherPallete {
   static const Color weatherRed = const Color(0xfff0341f);
   static const Color weatherDarkOrange = const Color(0xfffd9900);
   static const Color weatherOrange = const Color(0xffffb748);

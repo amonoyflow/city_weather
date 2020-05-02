@@ -2,8 +2,7 @@ import 'package:city_weather/models/current_weather.dart';
 import 'package:city_weather/services/geolocator_service.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:rxdart/rxdart.dart';
-
-import '_bloc_base.dart';
+import 'base/bloc_base.dart';
 
 class HomeBloc extends BlocBase {
   final currentWeatherFetcher = PublishSubject<CurrentWeather>();
@@ -11,6 +10,8 @@ class HomeBloc extends BlocBase {
 
   Stream<CurrentWeather> get currentWeatherStream => currentWeatherFetcher.stream;
   Stream<List<Placemark>> get currentLocationStream => currentLocationFetcher.stream;
+
+  bool unitImperial = false;
 
   Future<void> initialize() async {
     var position = await GeoLocatorService().getLocation();
@@ -26,6 +27,10 @@ class HomeBloc extends BlocBase {
     currentLocationFetcher.sink.add(placemark);
   }
 
+  bool isUnitImperial() {
+    return unitImperial;
+  }
+
   @override
   dispose() {
     super.dispose();
@@ -33,3 +38,5 @@ class HomeBloc extends BlocBase {
     currentLocationFetcher.close();
   }
 }
+
+final homeBloc = HomeBloc();
