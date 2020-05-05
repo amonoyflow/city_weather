@@ -32,12 +32,12 @@ I'm currently exploring Flutter as an alternative for mobile development so I've
         <td>
             <p>Hourly forecast screen</p>
             <br>
-            <img width="250px" height="410px" src="https://github.com/amonoyflow/city_weather/blob/master/assets/markdown/daily.png">
+            <img width="250px" height="410px" src="https://github.com/amonoyflow/city_weather/blob/master/assets/markdown/hourly.png">
         </td>
         <td>
             <p>Daily forecast screen</p>
             <br>
-            <img width="250px" height="410px" src="https://github.com/amonoyflow/city_weather/blob/master/assets/markdown/hourly.png">
+            <img width="250px" height="410px" src="https://github.com/amonoyflow/city_weather/blob/master/assets/markdown/daily.png">
         </td>
         <td>
             <p>Settings screen</p>
