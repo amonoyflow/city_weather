@@ -1,7 +1,6 @@
 import 'package:city_weather/models/temp.dart';
 import 'package:city_weather/models/weather.dart';
-import 'package:city_weather/resources/datetime_helper.dart';
-
+import 'package:city_weather/utilities/datetime_helper.dart';
 import 'feels_like.dart';
 
 class Daily {

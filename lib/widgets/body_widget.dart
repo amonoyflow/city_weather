@@ -1,9 +1,9 @@
 import 'package:city_weather/blocs/settigs_bloc.dart';
 import 'package:city_weather/constant/assets.dart';
 import 'package:city_weather/models/current_weather.dart';
-import 'package:city_weather/resources/datetime_helper.dart';
-import 'package:city_weather/resources/format_helper.dart';
-import 'package:city_weather/resources/temperature_color.dart';
+import 'package:city_weather/utilities/datetime_helper.dart';
+import 'package:city_weather/utilities/format_helper.dart';
+import 'package:city_weather/utilities/temperature_color.dart';
 import 'package:city_weather/widgets/weather_forecast_widget.dart';
 import 'package:city_weather/widgets/weather_info_widget.dart';
 import 'package:flutter/cupertino.dart';

@@ -1,7 +1,7 @@
 import 'package:city_weather/blocs/settigs_bloc.dart';
 import 'package:city_weather/constant/assets.dart';
 import 'package:city_weather/models/current_weather.dart';
-import 'package:city_weather/resources/format_helper.dart';
+import 'package:city_weather/utilities/format_helper.dart';
 import 'package:flutter/material.dart';
 
 class WeatherInfoWidget extends StatefulWidget {

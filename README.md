@@ -1,16 +1,9 @@
-# city_weather
+# City Weather App
 
-A new Flutter project.
+A mobile application displaying information of your current city.
 
-## Getting Started
+## Overview
 
-This project is a starting point for a Flutter application.
+I'm currently exploring Flutter as an alternative for mobile development so I've created simple weather mobile application.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# Screens

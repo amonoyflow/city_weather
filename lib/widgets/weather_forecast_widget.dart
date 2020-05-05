@@ -1,9 +1,9 @@
 import 'package:city_weather/blocs/settigs_bloc.dart';
 import 'package:city_weather/models/daily.dart';
 import 'package:city_weather/models/hourly.dart';
-import 'package:city_weather/resources/datetime_helper.dart';
-import 'package:city_weather/resources/format_helper.dart';
-import 'package:city_weather/resources/temperature_color.dart';
+import 'package:city_weather/utilities/datetime_helper.dart';
+import 'package:city_weather/utilities/format_helper.dart';
+import 'package:city_weather/utilities/temperature_color.dart';
 import 'package:flutter/material.dart';
 
 class WeatherForecastWidget extends StatefulWidget {
