@@ -50,16 +50,16 @@ I'm currently exploring Flutter as an alternative for mobile development so I've
 <table>
     <tr>
         <td>
-            <img width="250px" height="410px" src="https://github.com/amonoyflow/city_weather/blob/master/assets/markdown/home_2.png">
+            <img width="250px" height="410px" src="https://github.com/amonoyflow/city_weather/blob/master/assets/markdown/home_2.jpg">
         </td>
         <td>
-            <img width="250px" height="410px" src="https://github.com/amonoyflow/city_weather/blob/master/assets/markdown/hourly_2.png">
+            <img width="250px" height="410px" src="https://github.com/amonoyflow/city_weather/blob/master/assets/markdown/hourly_2.jpg">
         </td>
         <td>
-            <img width="250px" height="410px" src="https://github.com/amonoyflow/city_weather/blob/master/assets/markdown/daily_2.png">
+            <img width="250px" height="410px" src="https://github.com/amonoyflow/city_weather/blob/master/assets/markdown/daily_2.jpg">
         </td>
         <td>
-            <img width="250px" height="410px" src="https://github.com/amonoyflow/city_weather/blob/master/assets/markdown/settings_2.png">
+            <img width="250px" height="410px" src="https://github.com/amonoyflow/city_weather/blob/master/assets/markdown/settings_2.jpg">
         </td>
     </tr>
 </table>
