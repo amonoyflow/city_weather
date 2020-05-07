@@ -25,22 +25,22 @@ I'm currently exploring Flutter as an alternative for mobile development so I've
 <table>
     <tr>
         <td>
-            <p>Home screen</p>
+            <p style="text-align:center;">Home screen</p>
             <br>
             <img width="250px" height="410px" src="https://github.com/amonoyflow/city_weather/blob/master/assets/markdown/home.png">
         </td>
         <td>
-            <p>Hourly forecast screen</p>
+            <p style="text-align:center;">Hourly forecast screen</p>
             <br>
             <img width="250px" height="410px" src="https://github.com/amonoyflow/city_weather/blob/master/assets/markdown/hourly.png">
         </td>
         <td>
-            <p>Daily forecast screen</p>
+            <p style="text-align:center;">Daily forecast screen</p>
             <br>
             <img width="250px" height="410px" src="https://github.com/amonoyflow/city_weather/blob/master/assets/markdown/daily.png">
         </td>
         <td>
-            <p>Settings screen</p>
+            <p style="text-align:center;">Settings screen</p>
             <br>
             <img width="250px" height="410px" src="https://github.com/amonoyflow/city_weather/blob/master/assets/markdown/settings.png">
         </td>
