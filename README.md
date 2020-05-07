@@ -1,13 +1,13 @@
 # City Weather App
 
-A mobile application displaying information of your current city.
+A mobile application displaying weather information of your current city.
 
 ## Overview
 
 I'm currently exploring Flutter as an alternative for mobile development so I've created simple weather mobile application. The purpose of this project is mostly for learning.
 
 ## Features
-- Current temperature, , Humidity, Wind speed, UV Index, Cloudiness.
+- Current temperature, Humidity, Wind speed, UV Index, Cloudiness.
 - Hourly forecast, daily forecast (7 days).
 - Bloc architecture, RxDart.
 - Geolocator
@@ -43,6 +43,23 @@ I'm currently exploring Flutter as an alternative for mobile development so I've
             <p>Settings screen</p>
             <br>
             <img width="250px" height="410px" src="https://github.com/amonoyflow/city_weather/blob/master/assets/markdown/settings.png">
+        </td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <td>
+            <img width="250px" height="410px" src="https://github.com/amonoyflow/city_weather/blob/master/assets/markdown/home_2.png">
+        </td>
+        <td>
+            <img width="250px" height="410px" src="https://github.com/amonoyflow/city_weather/blob/master/assets/markdown/hourly_2.png">
+        </td>
+        <td>
+            <img width="250px" height="410px" src="https://github.com/amonoyflow/city_weather/blob/master/assets/markdown/daily_2.png">
+        </td>
+        <td>
+            <img width="250px" height="410px" src="https://github.com/amonoyflow/city_weather/blob/master/assets/markdown/settings_2.png">
         </td>
     </tr>
 </table>
