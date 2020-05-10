@@ -25,10 +25,13 @@ class _Home extends State<Home> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: _buildAppBar(),
-      body: _buildBody(),
+    return RefreshIndicator(
+      onRefresh: refreshData,
+        child: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: _buildAppBar(),
+        body: _buildBody(),
+      ),
     );
   }
 
@@ -53,5 +56,11 @@ class _Home extends State<Home> with TickerProviderStateMixin {
         return Center(child: CircularProgressIndicator());
       },
     );
+  }
+
+  Future<void> refreshData() async {
+    setState(() {
+      homeBloc.initialize();
+    });
   }
 }
