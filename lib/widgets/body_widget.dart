@@ -1,5 +1,6 @@
 import 'package:city_weather/blocs/settigs_bloc.dart';
 import 'package:city_weather/constant/assets.dart';
+import 'package:city_weather/dto/settings_dto.dart';
 import 'package:city_weather/models/current_weather.dart';
 import 'package:city_weather/utilities/datetime_helper.dart';
 import 'package:city_weather/utilities/format_helper.dart';
@@ -21,6 +22,7 @@ class BodyWidget extends StatefulWidget {
 }
 
 class _BodyState extends State<BodyWidget> {
+  @override
   @override
   Widget build(BuildContext context) {
     var weatherColor = TemperatureColor.getTemperatureColor(widget.currentWeather.current.temp);
@@ -62,12 +64,12 @@ class _BodyState extends State<BodyWidget> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             StreamBuilder(
-                              stream: settingsBloc.currentUnitStream,
-                              initialData: false,
-                              builder: (context, AsyncSnapshot<bool> snapshot) {
+                              stream: settingsBloc.settingsStream,
+                              initialData: SettingsDto(isImperial: false),
+                              builder: (context, AsyncSnapshot<SettingsDto> snapshot) {
                                 if (snapshot.hasData) {
                                   return Text(
-                                    FormatHelper.formatTemperature(widget.currentWeather.current.temp, settingsBloc.isUnitImperial()).floor().toString(),
+                                    FormatHelper.formatTemperature(widget.currentWeather.current.temp, settingsBloc.settings.isImperial).toString(),
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 100,

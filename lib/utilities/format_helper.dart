@@ -4,6 +4,7 @@ class FormatHelper {
   }
 
   static num formatTemperature(num temperature, bool isImperial) {
-    return isImperial ? (temperature * 1.8) + 32 : temperature;
+    var temp = isImperial ? (temperature * 1.8) + 32 : temperature;
+    return temp.floor();
   }
 }

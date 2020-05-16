@@ -31,19 +31,19 @@ class _SettingsState extends State<SettingsWidget> {
         )
       ),
       builder: (context) {
-        return Bottom();
+        return BottomSettingsWidget();
       }
     );
   }
 }
 
-class Bottom extends StatefulWidget {
+class BottomSettingsWidget extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _BottomState();
+  State<StatefulWidget> createState() => _BottomSettingsState();
 }
 
-class _BottomState extends State<Bottom> {
-  bool unitImperial = settingsBloc.isUnitImperial();
+class _BottomSettingsState extends State<BottomSettingsWidget> {
+  var isImperial = settingsBloc.settings.isImperial;
 
   @override
   Widget build(BuildContext context) {
@@ -52,11 +52,11 @@ class _BottomState extends State<Bottom> {
       child: Center(
         child: SwitchListTile(
           title: Text("Use Imperial System"),
-          value: unitImperial,
+          value: isImperial,
           onChanged: (bool newValue) {
             setState(() {
-              settingsBloc.onUnitChanged(newValue);
-              unitImperial = newValue;
+              settingsBloc.updateSettings(newValue);
+              this.isImperial = newValue;
             });
           },
           secondary: Image.asset(

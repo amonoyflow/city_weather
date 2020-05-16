@@ -1,5 +1,6 @@
 import 'package:city_weather/blocs/settigs_bloc.dart';
 import 'package:city_weather/constant/assets.dart';
+import 'package:city_weather/dto/settings_dto.dart';
 import 'package:city_weather/models/current_weather.dart';
 import 'package:city_weather/utilities/format_helper.dart';
 import 'package:flutter/material.dart';
@@ -30,13 +31,13 @@ class _WeatherInfoWidgetState extends State<WeatherInfoWidget> with TickerProvid
             "${widget.currentWeather.current.humidity}%"
           ),
           StreamBuilder(
-            stream: settingsBloc.currentUnitStream,
-            initialData: false,
-            builder: (context, AsyncSnapshot<bool> snapshot) {
+            stream: settingsBloc.settingsStream,
+            initialData: SettingsDto(isImperial: false),
+            builder: (context, AsyncSnapshot<SettingsDto> snapshot) {
               return createInfo(
                 "Wind", 
                 Assets.iconWindSpeed, 
-                FormatHelper.formatWindSpeed(widget.currentWeather.current.windSpeed, settingsBloc.isUnitImperial())
+                FormatHelper.formatWindSpeed(widget.currentWeather.current.windSpeed, settingsBloc.settings.isImperial)
               );
             }
           ),

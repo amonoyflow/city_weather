@@ -23,9 +23,9 @@ class HomeBloc extends BlocBase {
 
   @override
   dispose() {
-    super.dispose();
     currentWeatherFetcher.close();
     currentLocationFetcher.close();
+    super.dispose();
   }
 }
 

@@ -1,27 +1,32 @@
+import 'package:city_weather/database/database_provider.dart';
+import 'package:city_weather/dto/settings_dto.dart';
 import 'package:rxdart/rxdart.dart';
-
 import 'base/bloc_base.dart';
 
 class SettingsBloc extends BlocBase {
-  bool isImperialSystem = false;
+  final databaseProvider = DatabaseProvider();
+  SettingsDto settings;
+  
+  PublishSubject<SettingsDto> settingsFetcher = PublishSubject<SettingsDto>();
 
-  PublishSubject<bool> unitFetcher = PublishSubject<bool>();
-
-  Stream<bool> get currentUnitStream => unitFetcher.stream;
-
-  bool isUnitImperial() {
-    return isImperialSystem;
-  }
-
-  void onUnitChanged(bool isImperial) {
-    isImperialSystem = isImperial;
-    unitFetcher.sink.add(isImperialSystem);
-  }
+  Stream<SettingsDto> get settingsStream => settingsFetcher.stream;
 
   @override
   dispose() {
-    unitFetcher.close();
+    settingsFetcher.close();
     super.dispose();
+  }
+
+  void loadSavedSettings() async {
+    settings = await databaseProvider.getSettings();
+    settingsFetcher.sink.add(settings);
+  }
+
+  void updateSettings(bool isImperial) async {
+    settings = SettingsDto(isImperial: isImperial);
+    settingsFetcher.sink.add(settings);
+    await databaseProvider.deleteSettings();
+    await databaseProvider.insertSettings(settings);
   }
 }
 

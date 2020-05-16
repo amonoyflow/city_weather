@@ -1,4 +1,5 @@
 import 'package:city_weather/blocs/settigs_bloc.dart';
+import 'package:city_weather/dto/settings_dto.dart';
 import 'package:city_weather/models/daily.dart';
 import 'package:city_weather/models/hourly.dart';
 import 'package:city_weather/utilities/datetime_helper.dart';
@@ -103,11 +104,11 @@ class _WeatherForecastState extends State<WeatherForecastWidget> with TickerProv
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         StreamBuilder(
-                          stream: settingsBloc.currentUnitStream,
-                          initialData: false,
-                          builder: (context, AsyncSnapshot<bool> snapshot) {
+                          stream: settingsBloc.settingsStream,
+                          initialData: SettingsDto(isImperial: false),
+                          builder: (context, AsyncSnapshot<SettingsDto> snapshot) {
                             return Text(
-                              "${FormatHelper.formatTemperature(items[index].temp, settingsBloc.isUnitImperial()).floor().toString()}\u00B0",
+                              "${FormatHelper.formatTemperature(items[index].temp, settingsBloc.settings.isImperial).toString()}\u00B0",
                               style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.grey.shade700,
@@ -175,11 +176,11 @@ class _WeatherForecastState extends State<WeatherForecastWidget> with TickerProv
                         ),
                         SizedBox(width: 10),
                         StreamBuilder(
-                          stream: settingsBloc.currentUnitStream,
-                          initialData: false,
-                          builder: (context, AsyncSnapshot<bool> snapshot) {
+                          stream: settingsBloc.settingsStream,
+                          initialData: SettingsDto(isImperial: false),
+                          builder: (context, AsyncSnapshot<SettingsDto> snapshot) {
                             return Text(
-                              "${FormatHelper.formatTemperature(items[index].temp.day, settingsBloc.isUnitImperial()).floor().toString()}\u00B0",
+                              "${FormatHelper.formatTemperature(items[index].temp.day, settingsBloc.settings.isImperial).toString()}\u00B0",
                               style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.grey.shade700,
@@ -211,11 +212,11 @@ class _WeatherForecastState extends State<WeatherForecastWidget> with TickerProv
                         ),
                         SizedBox(width: 10),
                         StreamBuilder(
-                          stream: settingsBloc.currentUnitStream,
-                          initialData: false,
-                          builder: (context, AsyncSnapshot<bool> snapshot) {
+                          stream: settingsBloc.settingsStream,
+                          initialData: SettingsDto(isImperial: false),
+                          builder: (context, AsyncSnapshot<SettingsDto> snapshot) {
                             return Text(
-                              "${FormatHelper.formatTemperature(items[index].temp.eve, settingsBloc.isUnitImperial()).floor().toString()}\u00B0",
+                              "${FormatHelper.formatTemperature(items[index].temp.eve, settingsBloc.settings.isImperial).toString()}\u00B0",
                               style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.grey.shade700,
