@@ -42,12 +42,6 @@ class DatabaseProvider {
 		return result;
 	}
 
-	Future<int> updateSettings(SettingsDto settings) async {
-		var db = await this.database;
-		var result = await db.update(table, settings.toMap());
-		return result;
-	}
-
   Future<int> deleteSettings() async {
 		var db = await this.database;
 		var result = await db.rawDelete("DELETE FROM $table");
